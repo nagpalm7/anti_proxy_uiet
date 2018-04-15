@@ -40,6 +40,7 @@
                                 <video onclick="snapshot(this);" width=300 height=300 id="video" controls autoplay></video>
                                 <br>
                                 <canvas  id="myCanvas" width="300" height="220"></canvas>
+                                <div id="he"></div>
                             </p>
                     </div>
                     <audio id="myAudio">
@@ -128,6 +129,15 @@
             if(JSON.stringify(m).indexOf("success") > -1) {
                 Materialize.toast('User Identfied. Name : ' +JSON.stringify(m.images[0].candidates[0].subject_id), 6000);
                 console.log(m.images[0].candidates[0].subject_id);
+                var width=m.images[0].transaction.width;
+                var height=m.images[0].transaction.height;
+                var x=m.images[0].transaction.topLeftX;
+                var y=m.images[0].transaction.topLeftY;
+                document.getElementById("he").style.width = width+'px';
+                document.getElementById("he").style.height = height+'px';
+                document.getElementById("he").style.top =y+'px';
+                document.getElementById("he").style.left =x +'px';
+                console.log(response.images[0].transaction.topLeftY);
             }
             else{
                 Materialize.toast('User Not identified');
@@ -135,4 +145,12 @@
         });
     }
 </script>
+<style type="text/css">
+      #he {
+          border:1px solid red;
+          position:absolute;
+          margin-top: 410px;
+          margin-left: 320px;
+      }
+</style>
 </html>
